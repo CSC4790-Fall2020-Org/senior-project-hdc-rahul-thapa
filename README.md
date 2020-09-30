@@ -42,26 +42,26 @@ The link to these datasets are given below:
 
 We have also provided a data folder with MNIST dataset for ease of use.  
 
+**Note: For right now, you will only work with file HD_MNIST_version_2_retraining_framework.py. All the modules are in the same file. In fact, one module is directly being called inside the other. However, in future, the steps below will require separate files for each module. Also, it will be agnostic to the dataset if it is in similar domain.**
 
 ## Projection
-**In this section, you need to work with prunning.py file and Function.py file**
 
 ### Steps for Projection
-1. Inside prunning.py file, set a path (line 7) to the dataset you intend to train on.
+1. Lorem Ipsum
+2. Lorem Ipsum
 
 
 ## Testing
-**In this section, you need to work with main2.py and Function.py file inside src folder**
 
 ### Steps for Testing
-1. Inside main2.py, set the path variable (around line 14) for the dataset you want to train on.
+1. Lorem Ipsum
+2. Lorem Ipsum
 
 
 ## Retraining
-**In this section, you need to work with testing.py and Function.py file inside src folder**
 
 ### Steps for Retraining
-1. Open the testing.py file, and set the path (around line 10) to the image folder you want to test on. 
+1. Lorem Ipsum
 
 
 
