@@ -19,10 +19,10 @@ If there are any technical questions after the README, please contact:
 
 ## Table of Contents
 1. [Requirements](#requirements) to install on your system
-2. How to use [dataset](#dataset)
-3. How to use [projection](#projection)
-4. Steps for [testing](#testing)
-5. Steps for [retraining](#retraining)
+2. [dataset](#dataset) Info
+3. [projection](#projection) Module
+4. [testing](#testing) Module
+5. [retraining](#retraining) Module
 
 ## Requirements
 
