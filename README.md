@@ -13,7 +13,7 @@ If there are any technical questions after the README, please contact:
 
 ## Core Team
 * Dependable, Efficient, and Intelligent Computing Lab (DETAIL)
-  * Rahul Thapa (Lead Researcher, B.S in CS)
+  	* Rahul Thapa (Lead Researcher, B.S in CS)
 	* Xun Jiao (Faculty Advisor, EECS)
 	* Dongning Ma (Ph.D. Students, EECS)
 
