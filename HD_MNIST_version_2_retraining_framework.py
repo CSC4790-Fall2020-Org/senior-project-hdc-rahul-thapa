@@ -12,7 +12,7 @@ from sklearn.metrics import accuracy_score
 from matplotlib import pyplot as plt
 import copy
 import pandas as pd
-
+from perturbations_MNIST import skew, rotate, noise, brightness, elastic_transform
 
 # In[ ]:
 
@@ -26,6 +26,8 @@ def load_dataset():
     mndata = MNIST('./data/')
     X_train, labels_train = map(np.array, mndata.load_training())
     X_test, labels_test = map(np.array, mndata.load_testing())
+    X_train = X_train/255.
+    X_test = X_test/255.
     return X_train, labels_train, X_test, labels_test
 
 def get_scene(img, proj):
@@ -117,6 +119,8 @@ def discrepancies(models):
                    'y': y_test})
         df_discrepancies_train = df_train[(df_train[f"model_{seeds[0]}"] != df_train[f"model_{seeds[1]}"])]
         df_discrepancies_test = df_test[(df_test[f"model_{seeds[0]}"] != df_test[f"model_{seeds[1]}"])]
+        df_non_discrepancies_train = df_train[(df_train[f"model_{seeds[0]}"] == df_train[f"model_{seeds[1]}"])]
+        df_non_discrepancies_test = df_test[(df_test[f"model_{seeds[0]}"] == df_test[f"model_{seeds[1]}"])]
     elif len(models) == 3:
         df_train = pd.DataFrame({f'model_{seeds[0]}': list(results_train[0]),
                    f'model_{seeds[1]}': list(results_train[1]),
@@ -128,6 +132,8 @@ def discrepancies(models):
                    'y': y_test})
         df_discrepancies_train = df_train[(df_train[f"model_{seeds[0]}"] != df_train[f"model_{seeds[1]}"]) | (df_train[f"model_{seeds[0]}"] != df_train[f"model_{seeds[2]}"])]
         df_discrepancies_test = df_test[(df_test[f"model_{seeds[0]}"] != df_test[f"model_{seeds[1]}"]) | (df_test[f"model_{seeds[0]}"] != df_test[f"model_{seeds[2]}"])]
+        df_non_discrepancies_train = df_train[(df_train[f"model_{seeds[0]}"] == df_train[f"model_{seeds[1]}"]) & (df_train[f"model_{seeds[0]}"] == df_train[f"model_{seeds[2]}"])]
+        df_non_discrepancies_test = df_test[(df_test[f"model_{seeds[0]}"] == df_test[f"model_{seeds[1]}"]) & (df_test[f"model_{seeds[0]}"] == df_test[f"model_{seeds[2]}"])]
     else:
         print(f"This framework does not support {len(seeds)} number of models")
     
@@ -136,8 +142,9 @@ def discrepancies(models):
     
     df_discrepancies_train.reset_index(inplace=True)
     df_discrepancies_test.reset_index(inplace=True)
-    
-    return df_discrepancies_train, df_discrepancies_test
+    df_non_discrepancies_train.reset_index(inplace=True)
+    df_non_discrepancies_test.reset_index(inplace=True)
+    return df_discrepancies_train, df_discrepancies_test, df_non_discrepancies_train, df_non_discrepancies_test
 
 
 # In[ ]:
@@ -154,7 +161,7 @@ def retraining(models, epochs, method="partial", dataset="training"):
 #         projs.append(proj)
 #         X_train_projs.append(X_train_copy)
 #         X_test_projs.append(X_test_copy)
-    df_discrepancies_train, df_discrepancies_test = discrepancies(models)
+    df_discrepancies_train, df_discrepancies_test, _, _ = discrepancies(models)
     print("Retraining Started")
     for epoch in range(epochs):
         print(f"Epoch {epoch + 1}: ")
@@ -181,11 +188,56 @@ def retraining(models, epochs, method="partial", dataset="training"):
                 models[i][y_true] += hv
 
         if method.lower() == "partial":
-            _, _ = discrepancies(models)
+            _, _, _, _ = discrepancies(models)
         elif method.lower() == "full": 
-            df_discrepancies_train, df_discrepancies_test = discrepancies(models)
+            df_discrepancies_train, df_discrepancies_test, _, _ = discrepancies(models)
     print("Retraining Stopped...")
     return models
+
+def perturb_retraining(models, epochs=1):
+    _, _, df_non_discrepancies_train, df_non_discrepanceis_test = discrepancies(models)
+    _, X_discrepancies_projs, y_pred, y = perturb_discrepancies(models, X_test, df_non_discrepancies_test, n=len(df_non_discrepancies_test))
+    print("Retraining with manual perturbations data started")
+
+    for epoch in range(epochs):
+        print(f"Epoch {epoch + 1}: ")
+        for row in range(len(y)):
+            for i in range(len(models)):
+                y_false = y_pred[row][i]
+                y_true = y[row]
+
+                hv = X_discrepancies_projs[row]
+                models[i][y_false] -= hv[0]
+                models[i][y_true] += hv[0]
+        _, _, _, _ = discrepancies(models)
+    print("Retraining Stopped ...")
+    return models
+
+
+def perturb_discrepancies(models, X, df_non_discrepancies, n=4000, perturbations=[skew, noise, brightness, elastic_transform]):
+    new_df = df_non_discrepancies.sample(n)
+    X_discrepancies, X_discrepancies_projs, y_pred, y = [], [], [], []
+    for row in new_df.iterrows():
+        idx = row[1]["index"]
+        y_true = row[1]["y"]
+        for perturb in perturbations:
+            old_image = X[idx].reshape(28, 28)
+            new_image = perturb(old_image)
+            new_image = new_image.reshape(28*28)
+            predictions = []
+            for i in range(len(models)):
+                proj = projs[i]
+                hv = get_scene(new_image, proj).reshape(1, -1)
+                predictions.append(classify(hv, models[i])[0])
+            if len(set(predictions)) > 1:
+                print("True")
+                X_discrepancies.append(new_image)
+                X_discrepancies_projs.append(hv)
+                y_pred.append(predictions)
+                y.append(y_true)
+    print(f"{len(y)} perturbations found.")
+    return X_discrepancies, X_discrepancies_projs, y_pred, y
+
 def retraining_test_direct():
     return
 
@@ -194,7 +246,6 @@ def retraining_train():
 
 def retraining_test():
     return
-
 
 # In[ ]:
 
@@ -227,12 +278,16 @@ for i in range(len(seeds)):
 
 # In[ ]:
 
-
+#df_discrepancies_train, df_discrepancies_test, df_non_discrepancies_train, df_non_discrepancies_test = discrepancies(models)
+#print(len(df_discrepancies_test))
+#print(len(df_non_discrepancies_test))
+#print(len(df_discrepancies_train))
+#print(len(df_non_discrepancies_train))
 models = retraining(models, epochs, method="full", dataset="testing")
 
-
+# perturb_discrepancies(models, X_test, df_non_discrepancies_test, n=len(df_non_discrepancies_test))
 # In[ ]:
-
+#models = perturb_retraining(models)
 
 
 
