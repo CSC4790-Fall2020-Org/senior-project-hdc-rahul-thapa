@@ -250,7 +250,7 @@ def retraining_test():
 # In[ ]:
 
 
-X_train, labels_train, _, _ = load_dataset()
+X_train, labels_train, X_valid, labels_valid = load_dataset()
 # X_train, labels_train = shuffle(X_train, labels_train)
 X_train, X_test, y_train, y_test = train_test_split(X_train, labels_train, test_size=0.33, random_state=42)
 
@@ -262,7 +262,7 @@ D = 10000 # dimensions in random space
 IMG_LEN = 28
 NUM_SAMPLES = X_train.shape[0]
 seeds = [30, 40, 50]
-epochs = 10
+epochs = 20
 
 models = []
 projs = []
@@ -275,6 +275,7 @@ for i in range(len(seeds)):
     X_train_projs.append(X_train_copy)
     X_test_projs.append(X_test_copy)
 
+np.save("./models/raw_models.npy", models)
 
 # In[ ]:
 
@@ -284,7 +285,7 @@ for i in range(len(seeds)):
 #print(len(df_discrepancies_train))
 #print(len(df_non_discrepancies_train))
 models = retraining(models, epochs, method="full", dataset="testing")
-
+np.save("./models/retrained_models.npy", models)
 # perturb_discrepancies(models, X_test, df_non_discrepancies_test, n=len(df_non_discrepancies_test))
 # In[ ]:
 #models = perturb_retraining(models)
