@@ -7,8 +7,8 @@
 from scipy.ndimage.interpolation import map_coordinates
 from scipy.ndimage import interpolation
 from scipy.ndimage.filters import gaussian_filter
-from PIL import Image, ImageEnhance
-from mpl_toolkits.axes_grid1 import AxesGrid
+#from PIL import Image, ImageEnhance
+#from mpl_toolkits.axes_grid1 import AxesGrid
 from mnist import MNIST
 
 import numpy as np
