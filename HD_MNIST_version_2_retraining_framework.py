@@ -205,8 +205,7 @@ def perturb_retraining(models, epochs=1):
             for i in range(len(models)):
                 y_false = y_pred[row][i]
                 y_true = y[row]
-
-                hv = X_discrepancies_projs[row]
+                hv = X_discrepancies_projs[row][i]
                 models[i][y_false] -= hv[0]
                 models[i][y_true] += hv[0]
         _, _, _, _ = discrepancies(models)
@@ -225,16 +224,19 @@ def perturb_discrepancies(models, X, df_non_discrepancies, n=4000, perturbations
             new_image = perturb(old_image)
             new_image = new_image.reshape(28*28)
             predictions = []
+            images = []
             for i in range(len(models)):
                 proj = projs[i]
                 hv = get_scene(new_image, proj).reshape(1, -1)
                 predictions.append(classify(hv, models[i])[0])
-            if len(set(predictions)) > 1:
-                print("True")
-                X_discrepancies.append(new_image)
-                X_discrepancies_projs.append(hv)
-                y_pred.append(predictions)
-                y.append(y_true)
+                images.append(hv)
+                if len(predictions) == 3:
+                    if len(set(predictions)) > 1:
+                        print("True")
+                        X_discrepancies.append(new_image)
+                        X_discrepancies_projs.append(images)
+                        y_pred.append(predictions)
+                        y.append(y_true)
     print(f"{len(y)} perturbations found.")
     return X_discrepancies, X_discrepancies_projs, y_pred, y
 
@@ -275,7 +277,12 @@ for i in range(len(seeds)):
     X_train_projs.append(X_train_copy)
     X_test_projs.append(X_test_copy)
 
+#np.save("./perturbed_images/X_test_projs.npy", X_test_projs)
+#np.save("./perturbed_images/y_test.npy", y_test)
+#np.save("./models/raw_models.npy", models)
 np.save("./models/raw_models.npy", models)
+
+#models = np.load("./models/raw_models.npy")
 
 # In[ ]:
 
@@ -288,12 +295,58 @@ models = retraining(models, epochs, method="full", dataset="testing")
 np.save("./models/retrained_models.npy", models)
 # perturb_discrepancies(models, X_test, df_non_discrepancies_test, n=len(df_non_discrepancies_test))
 # In[ ]:
+
+#X_perturb_images, X_perturb_images_projs, y_perturb_pred, y_perturb_true = perturb_discrepancies(models, X_test, df_non_discrepancies_test, n=len(df_non_discrepancies_test))
 #models = perturb_retraining(models)
 
+#np.save("./perturbed_images/X_perturb_images.npy", X_perturb_images)
+#np.save("./perturbed_images/X_perturb_images_projs.npy", X_perturb_images_projs)
+#np.save("./perturbed_images/y_perturb_pred.npy", y_perturb_pred)
+#np.save("./perturbed_images/y_perturb_true.npy", y_perturb_true)
+#X_perturb_images = np.load("./perturbed_images/X_perturb_images.npy")
+#X_perturb_images_projs = np.load("./perturbed_images/X_perturb_images_projs.npy")
+#y_perturb_pred = np.load("./perturbed_images/y_perturb_pred.npy")
+#y_perturb_true = np.load("./perturbed_images/y_perturb_true.npy")
 
+#print(X_perturb_images_projs[0][0][0])
 
+#print(len(X_perturb_images))
+#print(len(X_perturb_images_projs))
+#print(len(y_perturb_pred))
+#print(len(y_perturb_true))
 
-# discrepancies(models, [30, 40, 50])
+#print("Length of test set before perturbations = ", len(X_test_projs))
+"""
+temp = []
+for i in range(len(seeds)):
+    temp_image = [X_perturb_images_projs[j][i][0] for j in range(len(X_perturb_images_projs))]
+    X_test_proj = np.append(X_test_projs[i], np.array(temp_image), axis=0)
+    X_test_projs[i] = X_test_proj
+
+y_test = np.append(np.array(y_test), y_perturb_true, axis=0)
+"""
+
+"""
+
+for i in range(len(X_perturb_images_projs)):
+    for j in range(len(seeds)):
+        print(j)
+        X_test_proj = X_test_projs[j]
+        #print("Length of original X_test proj = ", len(X_test_proj))
+        #print("Length of 1 element of original X_test proj = ", len(X_test_proj[0]))
+        #print("Length of 1 element of perturbed images proj = ", len(X_perturb_images_projs[i][j][0]))
+        X_test_proj = np.append(X_test_proj, [np.array(X_perturb_images_projs[i][j][0])], axis=0)
+        X_test_projs[j] = X_test_proj
+    print(i)
+    y_test = np.append(y_test, [y_perturb_true[i]], axis=0)
+"""
+#print("Length of test set after perturbations = ", len(X_test_projs))
+
+#models = retraining(models, epochs, method="full", dataset="testing")
+#models = perturb_retraining(models)
+
+#np.save("./models/retrained_perturb_models.npy", models)
+#discrepancies(models, [30, 40, 50])
 
 # digit_vector, proj, _, _ = HD_classifiers(40)
 
