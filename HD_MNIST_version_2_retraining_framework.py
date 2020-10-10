@@ -197,7 +197,6 @@ def retraining(models, epochs, method="partial", dataset="training"):
 def perturb_retraining(models, epochs=1):
     _, _, df_non_discrepancies_train, df_non_discrepanceis_test = discrepancies(models)
     _, X_discrepancies_projs, y_pred, y = perturb_discrepancies(models, X_test, df_non_discrepancies_test, n=len(df_non_discrepancies_test))
-    X_test_projs
     print("Retraining with manual perturbations data started")
 
     for epoch in range(epochs):
@@ -281,6 +280,7 @@ for i in range(len(seeds)):
 #np.save("./perturbed_images/X_test_projs.npy", X_test_projs)
 #np.save("./perturbed_images/y_test.npy", y_test)
 #np.save("./models/raw_models.npy", models)
+np.save("./models/raw_models.npy", models)
 
 #models = np.load("./models/raw_models.npy")
 
@@ -297,6 +297,7 @@ np.save("./models/retrained_models.npy", models)
 # In[ ]:
 
 #X_perturb_images, X_perturb_images_projs, y_perturb_pred, y_perturb_true = perturb_discrepancies(models, X_test, df_non_discrepancies_test, n=len(df_non_discrepancies_test))
+#models = perturb_retraining(models)
 
 #np.save("./perturbed_images/X_perturb_images.npy", X_perturb_images)
 #np.save("./perturbed_images/X_perturb_images_projs.npy", X_perturb_images_projs)
