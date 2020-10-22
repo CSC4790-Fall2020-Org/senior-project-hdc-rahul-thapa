@@ -1,0 +1,26 @@
+Seeds:  [30, 40, 50]
+Encoding:  float
+Generating random projection...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+Seed 30 Accuracy:  0.8192
+Seed 40 Accuracy:  0.8184
+Seed 50 Accuracy:  0.8196
+There are 311 adversarial cases.
+Seeds:  [30, 40, 50]
+Encoding:  float
+Generating random projection...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+Seed 30 Accuracy:  0.8574
+Seed 40 Accuracy:  0.8588
+Seed 50 Accuracy:  0.8588
+There are 166 adversarial cases.
