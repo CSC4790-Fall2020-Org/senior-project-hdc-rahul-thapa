@@ -18,11 +18,12 @@ If there are any technical questions after the README, please contact:
 	* Dongning Ma (Ph.D. Students, EECS)
 
 ## Table of Contents
-1. [Requirements](#requirements) to install on your system
-2. [dataset](#dataset) Info
-3. [projection](#projection) Module
-4. [testing](#testing) Module
-5. [retraining](#retraining) Module
+1. Project 
+2. [Requirements](#Requirements) to install on your system
+3. [Dataset](#Dataset) Info
+4. [Projection](#Projection) Module
+5. [Testing](#Testing) Module
+6. [Retraining](#Retraining) Module
 
 ## Requirements
 
