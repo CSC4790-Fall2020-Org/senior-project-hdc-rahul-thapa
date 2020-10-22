@@ -19,11 +19,10 @@ If there are any technical questions after the README, please contact:
 
 ## Table of Contents
 1. [Project Overview](#Overview)
-2. [Requirements](#Requirements) to install on your system
-3. [Dataset](#Dataset) Info
-4. [Projection](#Projection) Module
-5. [Testing](#Testing) Module
-6. [Retraining](#Retraining) Module
+2. [Requirements](#Requirements)
+3. [Dataset](#Dataset) 
+4. [Training Script](#Training)
+5. [Evaluation Script](#Evaluation)
 
 ## Overview
 
@@ -53,24 +52,18 @@ The link to the datasets we used in our experiments are given below. However, we
 We have also provided a data folder with MNIST dataset for ease of use.  
 
 
-## Projection
+## Training
 
 ### Steps for Projection
 1. Lorem Ipsum
 2. Lorem Ipsum
 
 
-## Testing
+## Evaluation
 
 ### Steps for Testing
 1. Lorem Ipsum
 2. Lorem Ipsum
-
-
-## Retraining
-
-### Steps for Retraining
-1. Lorem Ipsum
 
 
 
