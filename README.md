@@ -18,12 +18,14 @@ If there are any technical questions after the README, please contact:
 	* Dongning Ma (Ph.D. Students, EECS)
 
 ## Table of Contents
-1. Project 
+1. [Project Overview](#Overview)
 2. [Requirements](#Requirements) to install on your system
 3. [Dataset](#Dataset) Info
 4. [Projection](#Projection) Module
 5. [Testing](#Testing) Module
 6. [Retraining](#Retraining) Module
+
+## Overview
 
 ## Requirements
 
