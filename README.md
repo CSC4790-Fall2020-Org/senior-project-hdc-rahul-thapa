@@ -21,7 +21,7 @@ If there are any technical questions after the README, please contact:
 1. [Project Overview](#Overview)
 2. [Requirements](#Requirements)
 3. [Dataset](#Dataset) 
-4. [Training Script](#Training)
+4. [Training/Retraining Script](#Training)
 5. [Evaluation Script](#Evaluation)
 
 ## Overview
