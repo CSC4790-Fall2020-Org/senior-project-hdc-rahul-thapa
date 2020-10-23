@@ -96,6 +96,37 @@ def discrepancies(models, X, y, seeds):
     df_non_discrepancies.reset_index(inplace=True)
     return df_discrepancies, df_non_discrepancies
 
+def perturb_discrepancies(models, projs, X, df_non_discrepancies, perturbations=[skew, noise, brightness, elastic_transform]):
+    n = len(df_non_discrepancies)
+    new_df = df_non_discrepancies.sample(n)
+    X_discrepancies, X_discrepancies_projs, y_pred, y = [], [], [], []
+    pbar = tqdm(total = len(new_df))
+    for row in new_df.iterrows():
+        idx = row[1]["index"]
+        y_true = row[1]["y"]
+        for perturb in perturbations:
+            old_image = X[idx].reshape(28, 28)
+            new_image = perturb(old_image)
+            new_image = new_image.reshape(28*28)
+            predictions = []
+            images = []
+            for i in range(len(models)):
+                proj = projs[i]
+                hv = get_scene(new_image, proj).reshape(1, -1)
+                predictions.append(classify(hv, models[i])[0])
+                images.append(hv)
+                if len(predictions) == 3:
+                    if len(set(predictions)) > 1:
+                        X_discrepancies.append(new_image)
+                        X_discrepancies_projs.append(images)
+                        y_pred.append(predictions)
+                        y.append(y_true)
+        pbar.update(1)
+    pbar.close()
+
+    print(f"{len(y)} perturbations found.")
+    return X_discrepancies, X_discrepancies_projs, y_pred, y
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='HDXplore Evaluation')
@@ -125,3 +156,28 @@ if __name__ == '__main__':
     print("-------------------Retrained Model Evaluation------------------------")
     print()
     df_discrepancies, df_non_discrepancies = discrepancies(retrained_models, X_test, y_test, seeds)
+    idx_retrained = set(df_non_discrepancies["index"])
+    idx_raw = set(df_non_discrepancies_raw["index"])
+    idx = list(idx_retrained&idx_raw)
+    X_temp = X_test[idx]
+    y_temp = y_test[idx]
+    
+    print("------------Checking to make sure there are no more discrepancies in the new dataset-----------")
+    print("------------------Raw Model-----------------")
+    print()
+    df_discrepancies_raw, df_non_discrepancies_raw = discrepancies(raw_models, X_test, y_test, seeds)
+    print("------------------Retrained Model-----------------")
+    print()
+    df_discrepancies, df_non_discrepancies = discrepancies(retrained_models, X_test, y_test, seeds)
+    X_projs, projs = projections(X_temp, seeds)
+    print("-------------------Manual Perturbations Test---------------------------")
+    print("------------------Raw Model-----------------")
+    print()
+    _, _, _, _ = perturb_discrepancies(raw_models, projs, X_temp, df_non_discrepancies)
+    print("------------------Retrained Model-----------------")
+    print()
+    _, _, _, _ = perturb_discrepancies(raw_models, projs, X_temp, df_non_discrepancies)
+    
+    
+    
+    
