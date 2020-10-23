@@ -70,7 +70,7 @@ python HDXplore_MNIST.py \
     --perturbation True
 ```
 ## Evaluation
-1. We provide you with the HDXplore training script, [HDXplore_eval.py](./HDXplore_eval.py)
+1. We provide you with the HDXplore evaluation script, [HDXplore_eval.py](./HDXplore_eval.py)
 2. To evaluate the model:
 ```
 python HDXplore_eval.py \
