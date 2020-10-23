@@ -1,4 +1,4 @@
-# Differential Testing in Hyperdimensional Computing Paradigm Codebase
+# Differential Testing in Hyperdimensional Computing Paradigm
 
 **Note: If you find my work useful, please use the approproiate citations as below.**
 
