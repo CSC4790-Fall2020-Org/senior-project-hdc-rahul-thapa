@@ -23,6 +23,7 @@ If there are any technical questions after the README, please contact:
 3. [Dataset](#Dataset) 
 4. [Training/Retraining Script](#Training)
 5. [Evaluation Script](#Evaluation)
+6. [Results](#Results)
 
 ## Overview
 
@@ -54,16 +55,32 @@ We have also provided a data folder with MNIST dataset for ease of use.
 
 ## Training
 
-### Steps for Projection
-1. Lorem Ipsum
-2. Lorem Ipsum
-
-
+## Steps for training
+1. We provide you with the HDXplore training script, [HDXplore_MNIST.py](./HDXplore_MNIST.py)
+2. To train the model:
+```
+python HDXplore_MNIST.py \
+    --hd_dimension 10000 \
+    --seeds 30,40,50 \
+    --epochs 20 \
+    --dataset validation \
+    --method dynamic \
+    --data_split 0.33
+    --random_state 42 \
+    --perturbation True
+```
 ## Evaluation
+1. We provide you with the HDXplore training script, [HDXplore_eval.py](./HDXplore_eval.py)
+2. To evaluate the model:
+```
+python HDXplore_eval.py \
+    --path_to_raw_model ./models/raw_models.npy \
+    --path_to_retrained_model ./models/retrained_perturb_models.npy \
+    --seeds 30,40,50 \
+    --hd_dimension 10000
+```
 
-### Steps for Testing
-1. Lorem Ipsum
-2. Lorem Ipsum
+## Results
 
 
 
