@@ -14,9 +14,9 @@ from datetime import datetime
 
 
 class Logger(object):
-    def __init__(self):
+    def __init__(self, seeds, epochs, split, random_state):
         self.terminal = sys.stdout
-        self.log = open("./logs/HDXplore_logfile.log", "w")
+        self.log = open(f"./logs/HDXplore_seeds_{seeds}_epochs_{epochs}_split_{int(split*100)}_random_{random_state}_logfile.log", "w")
     def write(self, message):
         self.terminal.write(message)
         self.log.write(message)
@@ -79,7 +79,7 @@ def HD_classifiers(seed, encoding="float"):
     X_valid_copy = get_scenes(X_valid, proj)
     predictions = classify(X_valid_copy, digit_vectors)
     acc = accuracy_score(y_valid[:X_valid_copy.shape[0]], predictions)
-    print("Test accuracy: ", acc)
+    print("Valid accuracy: ", acc)
         
     return digit_vectors, proj, X_train_copy, X_valid_copy
 
@@ -129,8 +129,8 @@ def discrepancies(models):
     
     print(f"There are {len(df_discrepancies_train)} adversarial cases in training set.")
     print(f"There are {len(df_discrepancies_valid)} adversarial cases in validation set.")
-    print(f"There are {len(df_non_discrepancies_train)} non adversarial cases in training set.")
-    print(f"There are {len(df_non_discrepancies_valid)} non adversarial cases in validation set.")
+    #print(f"There are {len(df_non_discrepancies_train)} non adversarial cases in training set.")
+    #print(f"There are {len(df_non_discrepancies_valid)} non adversarial cases in validation set.")
     
     df_discrepancies_train.reset_index(inplace=True)
     df_discrepancies_valid.reset_index(inplace=True)
@@ -224,16 +224,16 @@ def perturb_discrepancies(models, X, df_non_discrepancies, perturbations=[skew, 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='HDXplore Framework for MNIST')
     parser.add_argument('--hd_dimension', default=10000, type=int, help='Dimension of Hypervector. Default 10000')
-    parser.add_argument('--seeds', default='30,40,50', type=str, help="Three random seeds (ex: if [30, 40, 50], --seeds 30,40,50)")
+    parser.add_argument('--seeds', default='30#40#50', type=str, help="Three random seeds (ex: if [30, 40, 50], --seeds 30#40#50)")
     parser.add_argument('--epochs', default=20, type=int, help="Number of epochs for retraining. Defualt 20.")
     parser.add_argument('--dataset', default='validation', type=str, help="training or validation dataset to run the HDXplore algorithm on. Default validation")
     parser.add_argument('--method', default='dynamic', type=str, help="dynamic for updating the discrepant images on each epochs of retraining; static for retraining on the same initial discrepant images. Defualt dynamic.")
-    parser.add_argument('--data_split', default=0.33, type=int, help="Split fraction for training and validation set. Defualt 0.33.")
+    parser.add_argument('--data_split', default=0.33, type=float, help="Split fraction for training and validation set. Defualt 0.33.")
     parser.add_argument('--random_state', default=42, type=int, help="random state for train validation split. Defualt 42.")
     parser.add_argument('--perturbation', default='True', type=str, help="True if you want to apply manual perturbations to the images where all models agree on. Defualt True")
 
     args = parser.parse_args()
-    sys.stdout = Logger()
+    sys.stdout = Logger(args.seeds, args.epochs, args.data_split, args.random_state)
 
     X_train, y_train, X_test, y_test = load_dataset()
     X_train, X_valid, y_train, y_valid = train_test_split(X_train, y_train, test_size=args.data_split, random_state=args.random_state)
@@ -241,7 +241,7 @@ if __name__ == '__main__':
     D = args.hd_dimension
     IMG_LEN = 28
     NUM_SAMPLES = X_train.shape[0]
-    seeds = args.seeds.split(',')
+    seeds = args.seeds.split('#')
     seeds = [int(seed) for seed in seeds]
     epochs = args.epochs
 
@@ -250,6 +250,7 @@ if __name__ == '__main__':
     X_train_projs = []
     X_valid_projs = []
 
+    print()
     print("-------------------------HD Projection Module----------------------------")
     print()
     for i in range(len(seeds)):
@@ -259,25 +260,27 @@ if __name__ == '__main__':
         X_train_projs.append(X_train_copy)
         X_valid_projs.append(X_valid_copy)
 
-    np.save(f"./models/raw_models_{'_'.join([str(seed) for seed in seeds])}.npy", models)
+    np.save(f"./models/raw_models_seeds_{args.seeds}_epochs_{args.epochs}_split_{int(args.data_split*100)}_random_{args.random_state}.npy", models)
 
     if args.perturbation == 'False':
+        print()
         print("------------------------------Retraining Module--------------------------")
         print()
         models = retraining(models, epochs, method=args.method, dataset=args.dataset)
-        np.save(f"./models/retrained_models_{'_'.join([str(seed) for seed in seeds])}.npy", models)
+        np.save(f"./models/retrained_models_seeds_{args.seeds}_epochs_{args.epochs}_split_{int(args.data_split*100)}_random_{args.random_state}.npy", models)
     else:
+        print()
         print("-----------------------------Testing Module------------------------------")
         print()
         df_discrepancies_train, df_discrepancies_valid, df_non_discrepancies_train, df_non_discrepancies_valid = discrepancies(models)
-
+        print()
         print("--------------------------------Perturbation Module-----------------------")
         print()
         X_perturb_images, X_perturb_images_projs, y_perturb_pred, y_perturb_true = perturb_discrepancies(models, X_valid, df_non_discrepancies_valid)
-        np.save("./perturbed_images/X_perturb_images.npy", X_perturb_images)
-        np.save("./perturbed_images/X_perturb_images_projs.npy", X_perturb_images_projs)
-        np.save("./perturbed_images/y_perturb_pred.npy", y_perturb_pred)
-        np.save("./perturbed_images/y_perturb_true.npy", y_perturb_true)
+        np.save(f"./perturbed_images/X_perturb_images_seeds_{args.seeds}_epochs_{args.epochs}_split_{int(args.data_split*100)}_random_{args.random_state}.npy", X_perturb_images)
+        np.save(f"./perturbed_images/X_perturb_images_projs_seeds_{args.seeds}_epochs_{args.epochs}_split_{int(args.data_split*100)}_random_{args.random_state}.npy", X_perturb_images_projs)
+        np.save(f"./perturbed_images/y_perturb_pred_seeds_{args.seeds}_epochs_{args.epochs}_split_{int(args.data_split*100)}_random_{args.random_state}.npy", y_perturb_pred)
+        np.save(f"./perturbed_images/y_perturb_true_seeds_{args.seeds}_epochs_{args.epochs}_split_{int(args.data_split*100)}_random_{args.random_state}.npy", y_perturb_true)
 
 
         temp = []
@@ -287,9 +290,8 @@ if __name__ == '__main__':
             X_valid_projs[i] = X_valid_proj
         y_valid = np.append(np.array(y_valid), y_perturb_true, axis=0)
 
-        print("Length of valid set after perturbations = ", len(X_valid_projs))
-
+        print()
         print("-------------------------------------Retraining Module-----------------------------")
         print()
         models = retraining(models, epochs, method=args.method, dataset=args.dataset)
-        np.save(f"./models/retrained_perturb_models_{'_'.join([str(seed) for seed in seeds])}.npy", models)
+        np.save(f"./models/retrained_perturb_models_seeds_{args.seeds}_epochs_{args.epochs}_split_{int(args.data_split*100)}_random_{args.random_state}.npy", models)

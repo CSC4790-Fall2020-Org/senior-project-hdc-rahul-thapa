@@ -13,9 +13,9 @@ import sys
 from datetime import datetime
 
 class Logger(object):
-    def __init__(self):
+    def __init__(self, file_name):
         self.terminal = sys.stdout
-        self.log = open("./logs/HDXplore_eval_logfile.log", "w")
+        self.log = open(f"./logs/HDXplore_eval_{file_name}_logfile.log", "w")
     def write(self, message):
         self.terminal.write(message)
         self.log.write(message)
@@ -130,13 +130,21 @@ def perturb_discrepancies(models, projs, X, df_non_discrepancies, perturbations=
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='HDXplore Evaluation')
-    parser.add_argument('--path_to_raw_model', default='./models/raw_models.npy', type=str, help='Path to the model without applying HDXplore')
-    parser.add_argument('--path_to_retrained_model', default='./models/retrained_perturb_models.npy', type=str, help='Path to the retrained model using HDXplore')
-    parser.add_argument('--seeds', default='30,40,50', type=str, help="Three random seeds (ex: if [30, 40, 50], --seeds 30,40,50)")
+    parser.add_argument('--path_to_raw_model', default='./models/raw_models_seeds_30#40#50_epochs_20_split_33_random_42.npy', type=str, help='Path to the model without applying HDXplore')
+    parser.add_argument('--path_to_retrained_model', default='./models/retrained_perturb_models_seeds_30#40#50_epochs_20_split_33_random_42.npy', type=str, help='Path to the retrained model using HDXplore')
+    parser.add_argument('--seeds', default='30#40#50', type=str, help="Three random seeds (ex: if [30, 40, 50], --seeds 30#40#50)")
     parser.add_argument('--hd_dimension', default=10000, type=int, help='Dimension of Hypervector. Default 10000')
 
     args = parser.parse_args()
-    sys.stdout = Logger()
+
+    # Extracting name for saving log file
+    file_name = args.path_to_raw_model
+    temp_file = file_name.split("/")[-1]
+    temp_file = temp_file.split(".")[0]
+    temp_file = temp_file.split("_")[-8:]
+    file_name = "_".join(temp_file)
+
+    sys.stdout = Logger(file_name)
 
     _, _, X_test, y_test = load_dataset()
 
@@ -144,15 +152,17 @@ if __name__ == '__main__':
     IMG_LEN = 28
     D = args.hd_dimension
 
-    seeds = args.seeds.split(',')
+    seeds = args.seeds.split('#')
     seeds = [int(seed) for seed in seeds]
 
     raw_models = np.load(args.path_to_raw_model)
     retrained_models = np.load(args.path_to_retrained_model)
 
+    print()
     print("-------------------Raw Model Evaluation-----------------------")
     print()
     df_discrepancies_raw, df_non_discrepancies_raw = discrepancies(raw_models, X_test, y_test, seeds)
+    print()
     print("-------------------Retrained Model Evaluation------------------------")
     print()
     df_discrepancies, df_non_discrepancies = discrepancies(retrained_models, X_test, y_test, seeds)
@@ -162,21 +172,26 @@ if __name__ == '__main__':
     X_temp = X_test[idx]
     y_temp = y_test[idx]
     
+    print()
     print("------------Checking to make sure there are no more discrepancies in the new dataset-----------")
+    print()
     print("------------------Raw Model-----------------")
     print()
-    df_discrepancies_raw, df_non_discrepancies_raw = discrepancies(raw_models, X_test, y_test, seeds)
+    df_discrepancies_raw, df_non_discrepancies_raw = discrepancies(raw_models, X_temp, y_temp, seeds)
+    print()
     print("------------------Retrained Model-----------------")
     print()
-    df_discrepancies, df_non_discrepancies = discrepancies(retrained_models, X_test, y_test, seeds)
+    df_discrepancies, df_non_discrepancies = discrepancies(retrained_models, X_temp, y_temp, seeds)
     X_projs, projs = projections(X_temp, seeds)
+    print()
     print("-------------------Manual Perturbations Test---------------------------")
     print("------------------Raw Model-----------------")
     print()
     _, _, _, _ = perturb_discrepancies(raw_models, projs, X_temp, df_non_discrepancies)
+    print()
     print("------------------Retrained Model-----------------")
     print()
-    _, _, _, _ = perturb_discrepancies(raw_models, projs, X_temp, df_non_discrepancies)
+    _, _, _, _ = perturb_discrepancies(retrained_models, projs, X_temp, df_non_discrepancies)
     
     
     

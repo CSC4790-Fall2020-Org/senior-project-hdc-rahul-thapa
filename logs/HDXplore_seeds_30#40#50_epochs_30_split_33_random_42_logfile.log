@@ -1,0 +1,328 @@
+
+-------------------------HD Projection Module----------------------------
+
+Seed:  30
+Encoding:  float
+Generating random projection...
+(10000, 784)
+Projecting images to higher dim space...
+Dimension of digit vector:  (10, 10000)
+Train accuracy:  0.8133084577114428
+Valid accuracy:  0.8077777777777778
+Seed:  40
+Encoding:  float
+Generating random projection...
+(10000, 784)
+Projecting images to higher dim space...
+Dimension of digit vector:  (10, 10000)
+Train accuracy:  0.8139800995024875
+Valid accuracy:  0.8082323232323232
+Seed:  50
+Encoding:  float
+Generating random projection...
+(10000, 784)
+Projecting images to higher dim space...
+Dimension of digit vector:  (10, 10000)
+Train accuracy:  0.8131094527363184
+Valid accuracy:  0.8085858585858586
+
+-----------------------------Testing Module------------------------------
+
+Seed 30 Train Accuracy:  0.8133084577114428
+Seed 30 Valid Accuracy:  0.8077777777777778
+Seed 40 Train Accuracy:  0.8139800995024875
+Seed 40 Valid Accuracy:  0.8082323232323232
+Seed 50 Train Accuracy:  0.8131094527363184
+Seed 50 Valid Accuracy:  0.8085858585858586
+There are 1201 adversarial cases in training set.
+There are 631 adversarial cases in validation set.
+
+--------------------------------Perturbation Module-----------------------
+
+2492 perturbations found.
+Length of valid set after perturbations =  3
+
+-------------------------------------Retraining Module-----------------------------
+
+
+Seed 30 Train Accuracy:  0.8133084577114428
+Seed 30 Valid Accuracy:  0.7518840839763143
+Seed 40 Train Accuracy:  0.8139800995024875
+Seed 40 Valid Accuracy:  0.7518840839763143
+Seed 50 Train Accuracy:  0.8131094527363184
+Seed 50 Valid Accuracy:  0.75448591422932
+There are 1201 adversarial cases in training set.
+There are 3123 adversarial cases in validation set.
+Retraining Started...
+
+Epoch 1: 
+Seed 30 Train Accuracy:  0.8234577114427861
+Seed 30 Valid Accuracy:  0.7769603445182128
+Seed 40 Train Accuracy:  0.8246517412935324
+Seed 40 Valid Accuracy:  0.7772743585142652
+Seed 50 Train Accuracy:  0.823407960199005
+Seed 50 Valid Accuracy:  0.7787098510676476
+There are 1264 adversarial cases in training set.
+There are 1670 adversarial cases in validation set.
+Epoch 2: 
+Seed 30 Train Accuracy:  0.8263930348258707
+Seed 30 Valid Accuracy:  0.7830163287277947
+Seed 40 Train Accuracy:  0.8306965174129354
+Seed 40 Valid Accuracy:  0.7854835815539207
+Seed 50 Train Accuracy:  0.8282835820895522
+Seed 50 Valid Accuracy:  0.7853938632693342
+There are 1077 adversarial cases in training set.
+There are 1181 adversarial cases in validation set.
+Epoch 3: 
+Seed 30 Train Accuracy:  0.8308457711442786
+Seed 30 Valid Accuracy:  0.7877265386685807
+Seed 40 Train Accuracy:  0.8316417910447761
+Seed 40 Valid Accuracy:  0.787816256953167
+Seed 50 Train Accuracy:  0.8315174129353233
+Seed 50 Valid Accuracy:  0.7877713978108739
+There are 894 adversarial cases in training set.
+There are 946 adversarial cases in validation set.
+Epoch 4: 
+Seed 30 Train Accuracy:  0.832089552238806
+Seed 30 Valid Accuracy:  0.7903283689215862
+Seed 40 Train Accuracy:  0.8339303482587065
+Seed 40 Valid Accuracy:  0.7904629463484658
+Seed 50 Train Accuracy:  0.8332587064676616
+Seed 50 Valid Accuracy:  0.7902835097792931
+There are 824 adversarial cases in training set.
+There are 821 adversarial cases in validation set.
+Epoch 5: 
+Seed 30 Train Accuracy:  0.83318407960199
+Seed 30 Valid Accuracy:  0.7932890723129373
+Seed 40 Train Accuracy:  0.8351243781094527
+Seed 40 Valid Accuracy:  0.7941862551588014
+Seed 50 Train Accuracy:  0.8341791044776119
+Seed 50 Valid Accuracy:  0.7924367486093666
+There are 825 adversarial cases in training set.
+There are 789 adversarial cases in validation set.
+Epoch 6: 
+Seed 30 Train Accuracy:  0.8348507462686567
+Seed 30 Valid Accuracy:  0.7949040014354926
+Seed 40 Train Accuracy:  0.8361442786069652
+Seed 40 Valid Accuracy:  0.7944105508702674
+Seed 50 Train Accuracy:  0.8358457711442786
+Seed 50 Valid Accuracy:  0.7962049165619953
+There are 833 adversarial cases in training set.
+There are 757 adversarial cases in validation set.
+Epoch 7: 
+Seed 30 Train Accuracy:  0.8363681592039801
+Seed 30 Valid Accuracy:  0.7979544231114301
+Seed 40 Train Accuracy:  0.8379601990049751
+Seed 40 Valid Accuracy:  0.7990310425264668
+Seed 50 Train Accuracy:  0.8367164179104477
+Seed 50 Valid Accuracy:  0.7972366768347389
+There are 812 adversarial cases in training set.
+There are 720 adversarial cases in validation set.
+Epoch 8: 
+Seed 30 Train Accuracy:  0.8374626865671642
+Seed 30 Valid Accuracy:  0.7993899156648124
+Seed 40 Train Accuracy:  0.8383830845771144
+Seed 40 Valid Accuracy:  0.7994347748071057
+Seed 50 Train Accuracy:  0.8395771144278606
+Seed 50 Valid Accuracy:  0.8014534362102996
+There are 819 adversarial cases in training set.
+There are 661 adversarial cases in validation set.
+Epoch 9: 
+Seed 30 Train Accuracy:  0.8392039800995025
+Seed 30 Valid Accuracy:  0.8029786470482685
+Seed 40 Train Accuracy:  0.8402736318407961
+Seed 40 Valid Accuracy:  0.802888928763682
+Seed 50 Train Accuracy:  0.8397014925373134
+Seed 50 Valid Accuracy:  0.8015431544948861
+There are 796 adversarial cases in training set.
+There are 597 adversarial cases in validation set.
+Epoch 10: 
+Seed 30 Train Accuracy:  0.839776119402985
+Seed 30 Valid Accuracy:  0.8036515341826664
+Seed 40 Train Accuracy:  0.8406965174129353
+Seed 40 Valid Accuracy:  0.8042795621747713
+Seed 50 Train Accuracy:  0.841318407960199
+Seed 50 Valid Accuracy:  0.8044141396016509
+There are 771 adversarial cases in training set.
+There are 546 adversarial cases in validation set.
+Epoch 11: 
+Seed 30 Train Accuracy:  0.8411691542288557
+Seed 30 Valid Accuracy:  0.8063879418625516
+Seed 40 Train Accuracy:  0.8421890547263682
+Seed 40 Valid Accuracy:  0.8054010407321012
+Seed 50 Train Accuracy:  0.8422139303482588
+Seed 50 Valid Accuracy:  0.8063879418625516
+There are 711 adversarial cases in training set.
+There are 516 adversarial cases in validation set.
+Epoch 12: 
+Seed 30 Train Accuracy:  0.8419900497512438
+Seed 30 Valid Accuracy:  0.8075542795621747
+Seed 40 Train Accuracy:  0.8433333333333334
+Seed 40 Valid Accuracy:  0.80692625157007
+Seed 50 Train Accuracy:  0.8432587064676617
+Seed 50 Valid Accuracy:  0.8081823075542796
+There are 681 adversarial cases in training set.
+There are 477 adversarial cases in validation set.
+Epoch 13: 
+Seed 30 Train Accuracy:  0.8429601990049751
+Seed 30 Valid Accuracy:  0.8089000538309707
+Seed 40 Train Accuracy:  0.8444029850746269
+Seed 40 Valid Accuracy:  0.8083168849811592
+Seed 50 Train Accuracy:  0.8438557213930348
+Seed 50 Valid Accuracy:  0.8100215323883008
+There are 669 adversarial cases in training set.
+There are 475 adversarial cases in validation set.
+Epoch 14: 
+Seed 30 Train Accuracy:  0.8440796019900497
+Seed 30 Valid Accuracy:  0.8106944195226987
+Seed 40 Train Accuracy:  0.845
+Seed 40 Valid Accuracy:  0.8097523775345415
+Seed 50 Train Accuracy:  0.8443781094527363
+Seed 50 Valid Accuracy:  0.8109187152341647
+There are 681 adversarial cases in training set.
+There are 462 adversarial cases in validation set.
+Epoch 15: 
+Seed 30 Train Accuracy:  0.8447512437810946
+Seed 30 Valid Accuracy:  0.8116364615108559
+Seed 40 Train Accuracy:  0.8461194029850746
+Seed 40 Valid Accuracy:  0.8116813206531491
+Seed 50 Train Accuracy:  0.8450995024875622
+Seed 50 Valid Accuracy:  0.8118607572223219
+There are 677 adversarial cases in training set.
+There are 445 adversarial cases in validation set.
+Epoch 16: 
+Seed 30 Train Accuracy:  0.8453980099502487
+Seed 30 Valid Accuracy:  0.8127579400681859
+Seed 40 Train Accuracy:  0.8466169154228855
+Seed 40 Valid Accuracy:  0.8122644895029607
+Seed 50 Train Accuracy:  0.8462189054726368
+Seed 50 Valid Accuracy:  0.8128925174950655
+There are 684 adversarial cases in training set.
+There are 427 adversarial cases in validation set.
+Epoch 17: 
+Seed 30 Train Accuracy:  0.8460696517412936
+Seed 30 Valid Accuracy:  0.8135654046294635
+Seed 40 Train Accuracy:  0.8473880597014926
+Seed 40 Valid Accuracy:  0.8137448411986363
+Seed 50 Train Accuracy:  0.8465174129353233
+Seed 50 Valid Accuracy:  0.8136551229140498
+There are 683 adversarial cases in training set.
+There are 388 adversarial cases in validation set.
+Epoch 18: 
+Seed 30 Train Accuracy:  0.8466666666666667
+Seed 30 Valid Accuracy:  0.8147766014713799
+Seed 40 Train Accuracy:  0.8480348258706467
+Seed 40 Valid Accuracy:  0.8141037143369819
+Seed 50 Train Accuracy:  0.8473383084577114
+Seed 50 Valid Accuracy:  0.8156289251749507
+There are 676 adversarial cases in training set.
+There are 371 adversarial cases in validation set.
+Epoch 19: 
+Seed 30 Train Accuracy:  0.8471890547263682
+Seed 30 Valid Accuracy:  0.8156737843172438
+Seed 40 Train Accuracy:  0.8485572139303482
+Seed 40 Valid Accuracy:  0.8154943477480711
+Seed 50 Train Accuracy:  0.8475124378109453
+Seed 50 Valid Accuracy:  0.8156289251749507
+There are 664 adversarial cases in training set.
+There are 376 adversarial cases in validation set.
+Epoch 20: 
+Seed 30 Train Accuracy:  0.8479353233830845
+Seed 30 Valid Accuracy:  0.8163466714516419
+Seed 40 Train Accuracy:  0.8490796019900497
+Seed 40 Valid Accuracy:  0.8166158263054011
+Seed 50 Train Accuracy:  0.8485572139303482
+Seed 50 Valid Accuracy:  0.8170195585860398
+There are 662 adversarial cases in training set.
+There are 371 adversarial cases in validation set.
+Epoch 21: 
+Seed 30 Train Accuracy:  0.8483830845771144
+Seed 30 Valid Accuracy:  0.8172438542975058
+Seed 40 Train Accuracy:  0.8497512437810946
+Seed 40 Valid Accuracy:  0.8178270231473175
+Seed 50 Train Accuracy:  0.8487064676616916
+Seed 50 Valid Accuracy:  0.817064417728333
+There are 661 adversarial cases in training set.
+There are 353 adversarial cases in validation set.
+Epoch 22: 
+Seed 30 Train Accuracy:  0.8488308457711443
+Seed 30 Valid Accuracy:  0.8176924457204379
+Seed 40 Train Accuracy:  0.8499004975124378
+Seed 40 Valid Accuracy:  0.8181410371433698
+Seed 50 Train Accuracy:  0.8493532338308458
+Seed 50 Valid Accuracy:  0.8189485017046474
+There are 646 adversarial cases in training set.
+There are 330 adversarial cases in validation set.
+Epoch 23: 
+Seed 30 Train Accuracy:  0.8494776119402985
+Seed 30 Valid Accuracy:  0.8180064597164902
+Seed 40 Train Accuracy:  0.8505721393034826
+Seed 40 Valid Accuracy:  0.8189485017046474
+Seed 50 Train Accuracy:  0.8497512437810946
+Seed 50 Valid Accuracy:  0.8185896285663018
+There are 656 adversarial cases in training set.
+There are 337 adversarial cases in validation set.
+Epoch 24: 
+Seed 30 Train Accuracy:  0.849726368159204
+Seed 30 Valid Accuracy:  0.8187690651354746
+Seed 40 Train Accuracy:  0.8507960199004975
+Seed 40 Valid Accuracy:  0.8191279382738202
+Seed 50 Train Accuracy:  0.8501990049751244
+Seed 50 Valid Accuracy:  0.8201596985465638
+There are 655 adversarial cases in training set.
+There are 318 adversarial cases in validation set.
+Epoch 25: 
+Seed 30 Train Accuracy:  0.8504228855721393
+Seed 30 Valid Accuracy:  0.8198008254082182
+Seed 40 Train Accuracy:  0.8508706467661692
+Seed 40 Valid Accuracy:  0.8202942759734434
+Seed 50 Train Accuracy:  0.8506716417910448
+Seed 50 Valid Accuracy:  0.819531670554459
+There are 659 adversarial cases in training set.
+There are 315 adversarial cases in validation set.
+Epoch 26: 
+Seed 30 Train Accuracy:  0.8508706467661692
+Seed 30 Valid Accuracy:  0.8202494168311502
+Seed 40 Train Accuracy:  0.8512437810945274
+Seed 40 Valid Accuracy:  0.8206980082540822
+Seed 50 Train Accuracy:  0.851044776119403
+Seed 50 Valid Accuracy:  0.8207877265386686
+There are 646 adversarial cases in training set.
+There are 323 adversarial cases in validation set.
+Epoch 27: 
+Seed 30 Train Accuracy:  0.8513930348258707
+Seed 30 Valid Accuracy:  0.8211914588193073
+Seed 40 Train Accuracy:  0.8516169154228855
+Seed 40 Valid Accuracy:  0.8214157545307734
+Seed 50 Train Accuracy:  0.8514925373134329
+Seed 50 Valid Accuracy:  0.8215951910999462
+There are 652 adversarial cases in training set.
+There are 297 adversarial cases in validation set.
+Epoch 28: 
+Seed 30 Train Accuracy:  0.8516169154228855
+Seed 30 Valid Accuracy:  0.8212811771038938
+Seed 40 Train Accuracy:  0.8520398009950249
+Seed 40 Valid Accuracy:  0.8218194868114121
+Seed 50 Train Accuracy:  0.8518407960199005
+Seed 50 Valid Accuracy:  0.8220886416651714
+There are 641 adversarial cases in training set.
+There are 311 adversarial cases in validation set.
+Epoch 29: 
+Seed 30 Train Accuracy:  0.852139303482587
+Seed 30 Valid Accuracy:  0.8223129373766374
+Seed 40 Train Accuracy:  0.8524875621890547
+Seed 40 Valid Accuracy:  0.8222680782343441
+Seed 50 Train Accuracy:  0.852139303482587
+Seed 50 Valid Accuracy:  0.8220437825228781
+There are 647 adversarial cases in training set.
+There are 297 adversarial cases in validation set.
+Epoch 30: 
+Seed 30 Train Accuracy:  0.8523880597014926
+Seed 30 Valid Accuracy:  0.8228063879418626
+Seed 40 Train Accuracy:  0.8526119402985075
+Seed 40 Valid Accuracy:  0.8221783599497577
+Seed 50 Train Accuracy:  0.8525373134328358
+Seed 50 Valid Accuracy:  0.8229858245110353
+There are 648 adversarial cases in training set.
+There are 308 adversarial cases in validation set.
+Retraining Stopped...

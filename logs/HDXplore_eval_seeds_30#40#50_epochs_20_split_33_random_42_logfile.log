@@ -1,0 +1,84 @@
+
+-------------------Raw Model Evaluation-----------------------
+
+Seeds:  [30, 40, 50]
+Encoding:  float
+Generating random projection...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+Seed 30 Accuracy:  0.8192
+Seed 40 Accuracy:  0.8184
+Seed 50 Accuracy:  0.8196
+There are 311 adversarial cases.
+
+-------------------Retrained Model Evaluation------------------------
+
+Seeds:  [30, 40, 50]
+Encoding:  float
+Generating random projection...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+Seed 30 Accuracy:  0.8552
+Seed 40 Accuracy:  0.8559
+Seed 50 Accuracy:  0.8556
+There are 157 adversarial cases.
+
+------------Checking to make sure there are no more discrepancies in the new dataset-----------
+
+------------------Raw Model-----------------
+
+Seeds:  [30, 40, 50]
+Encoding:  float
+Generating random projection...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+Seed 30 Accuracy:  0.8412349555206698
+Seed 40 Accuracy:  0.8412349555206698
+Seed 50 Accuracy:  0.8412349555206698
+There are 0 adversarial cases.
+
+------------------Retrained Model-----------------
+
+Seeds:  [30, 40, 50]
+Encoding:  float
+Generating random projection...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+Seed 30 Accuracy:  0.8712715855572999
+Seed 40 Accuracy:  0.8712715855572999
+Seed 50 Accuracy:  0.8712715855572999
+There are 0 adversarial cases.
+Seeds:  [30, 40, 50]
+Encoding:  float
+Generating random projection...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+(10000, 784)
+Projecting images to higher dim space...
+
+-------------------Manual Perturbations Test---------------------------
+------------------Raw Model-----------------
+
+1188 perturbations found.
+
+------------------Retrained Model-----------------
+
+708 perturbations found.
