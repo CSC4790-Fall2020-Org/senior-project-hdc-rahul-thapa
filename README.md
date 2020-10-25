@@ -52,7 +52,7 @@ The link to the datasets we used in our experiments are given below. However, we
 
 We have also provided a data folder with MNIST dataset for ease of use.  
 
-## Training
+## Training/Retraining
 Make sure you clone this repository and open command prompt inside the folder. 
 
 ## Steps for training/retraining
