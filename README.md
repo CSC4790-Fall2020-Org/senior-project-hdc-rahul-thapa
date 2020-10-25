@@ -21,7 +21,7 @@ If there are any technical questions after the README, please contact:
 1. [Project Overview](#Overview)
 2. [Requirements](#Requirements)
 3. [Dataset](#Dataset) 
-4. [Training/Retraining Script](#Training)
+4. [Training/Retraining Script](#Training/Retraining)
 5. [Evaluation Script](#Evaluation)
 6. [Results](#Results)
 
@@ -52,16 +52,16 @@ The link to the datasets we used in our experiments are given below. However, we
 
 We have also provided a data folder with MNIST dataset for ease of use.  
 
-
 ## Training
+Make sure you clone this repository and open command prompt inside the folder. 
 
-## Steps for training
+## Steps for training/retraining
 1. We provide you with the HDXplore training script, [HDXplore_MNIST.py](./HDXplore_MNIST.py)
-2. To train the model:
+2. To train the model, run the following script. Note that all of these parameters has default value. Therefore, if you simply run the script without any parameter, it will give you a version of our result. 
 ```
 python HDXplore_MNIST.py \
     --hd_dimension 10000 \
-    --seeds 30,40,50 \
+    --seeds 30#40#50 \
     --epochs 20 \
     --dataset validation \
     --method dynamic \
@@ -71,12 +71,12 @@ python HDXplore_MNIST.py \
 ```
 ## Evaluation
 1. We provide you with the HDXplore evaluation script, [HDXplore_eval.py](./HDXplore_eval.py)
-2. To evaluate the model:
+2. To evaluate the model, run the following script. Make sure you use the right models and epochs, consistent with the training/retraining process above. 
 ```
 python HDXplore_eval.py \
-    --path_to_raw_model ./models/raw_models.npy \
-    --path_to_retrained_model ./models/retrained_perturb_models.npy \
-    --seeds 30,40,50 \
+    --path_to_raw_model ./models/raw_models_seeds_30#40#50_epochs_20_split_33.npy \
+    --path_to_retrained_model ./models/retrained_perturb_models_seeds_30#40#50_epochs_20_split_33.npy \
+    --seeds 30#40#50 \
     --hd_dimension 10000
 ```
 
