@@ -21,7 +21,7 @@ If there are any technical questions after the README, please contact:
 1. [Project Overview](#Overview)
 2. [Requirements](#Requirements)
 3. [Dataset](#Dataset) 
-4. [Training/Retraining Script](#Training/Retraining)
+4. [Training/Retraining Script](#Training)
 5. [Evaluation Script](#Evaluation)
 6. [Results](#Results)
 
@@ -52,7 +52,7 @@ The link to the datasets we used in our experiments are given below. However, we
 
 We have also provided a data folder with MNIST dataset for ease of use.  
 
-## Training/Retraining
+## Training
 Make sure you clone this repository and open command prompt inside the folder. 
 
 ## Steps for training/retraining
