@@ -26,10 +26,10 @@ Projecting images to higher dim space...
 Projecting images to higher dim space...
 (10000, 784)
 Projecting images to higher dim space...
-Seed 30 Accuracy:  0.8961
-Seed 40 Accuracy:  0.8954
-Seed 50 Accuracy:  0.8948
-There are 166 adversarial cases.
+Seed 30 Accuracy:  0.8938
+Seed 40 Accuracy:  0.8944
+Seed 50 Accuracy:  0.8952
+There are 133 adversarial cases.
 
 ------------Checking to make sure there are no more discrepancies in the new dataset-----------
 
@@ -44,9 +44,9 @@ Projecting images to higher dim space...
 Projecting images to higher dim space...
 (10000, 784)
 Projecting images to higher dim space...
-Seed 30 Accuracy:  0.8409542743538767
-Seed 40 Accuracy:  0.8409542743538767
-Seed 50 Accuracy:  0.8409542743538767
+Seed 30 Accuracy:  0.8396285475792988
+Seed 40 Accuracy:  0.8396285475792988
+Seed 50 Accuracy:  0.8396285475792988
 There are 0 adversarial cases.
 
 ------------------Retrained Model-----------------
@@ -60,9 +60,9 @@ Projecting images to higher dim space...
 Projecting images to higher dim space...
 (10000, 784)
 Projecting images to higher dim space...
-Seed 30 Accuracy:  0.9083394370618395
-Seed 40 Accuracy:  0.9083394370618395
-Seed 50 Accuracy:  0.9083394370618395
+Seed 30 Accuracy:  0.906406510851419
+Seed 40 Accuracy:  0.906406510851419
+Seed 50 Accuracy:  0.906406510851419
 There are 0 adversarial cases.
 Seeds:  [30, 40, 50]
 Encoding:  float
@@ -77,8 +77,8 @@ Projecting images to higher dim space...
 -------------------Manual Perturbations Test---------------------------
 ------------------Raw Model-----------------
 
-1189 perturbations found.
+1219 perturbations found.
 
 ------------------Retrained Model-----------------
 
-736 perturbations found.
+692 perturbations found.

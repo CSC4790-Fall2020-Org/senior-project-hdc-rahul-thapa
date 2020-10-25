@@ -11,7 +11,7 @@ import os, argparse
 from tqdm import tqdm
 import sys
 from datetime import datetime
-
+import time
 
 class Logger(object):
     def __init__(self, seeds, epochs, split, random_state):
@@ -41,7 +41,7 @@ def get_scene(img, proj):
 
 # Transform the image vectors into the hypervectors
 def get_scenes(images, proj):
-    return np.dot(images[:NUM_SAMPLES, :], proj.T)
+    return np.dot(images[:, :], proj.T)
 
 def classify(images, digit_vectors):
     similarities = cosine_similarity(images, digit_vectors)
@@ -194,6 +194,7 @@ def perturb_discrepancies(models, X, df_non_discrepancies, perturbations=[skew, 
     new_df = df_non_discrepancies.sample(n)
     X_discrepancies, X_discrepancies_projs, y_pred, y = [], [], [], []
     pbar = tqdm(total = len(new_df))
+    start = time.time()
     for row in new_df.iterrows():
         idx = row[1]["index"]
         y_true = row[1]["y"]
@@ -215,9 +216,10 @@ def perturb_discrepancies(models, X, df_non_discrepancies, perturbations=[skew, 
                         y_pred.append(predictions)
                         y.append(y_true)
         pbar.update(1)
+    end = time.time()
     pbar.close()
-
-    print(f"{len(y)} perturbations found.")
+    print(f"{len(perturbations)} perturbations was applied to {len(new_df)} images.")
+    print(f"{len(y)} perturbations found in {end-start} seconds.")
     return X_discrepancies, X_discrepancies_projs, y_pred, y
 
 
