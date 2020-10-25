@@ -89,7 +89,7 @@ Our framework, HDXplore, has following contributions/results:
 
 ## Demo
 
-**Note: If you want to see the full normal speed demo, here is the [link](link)**
+**Note: If you want to see the full normal speed demo, here is the [link](https://drive.google.com/file/d/1XuxvOmO_U44uPGPP4FpCt9bfVqdzczBW/view?usp=sharing)**
 
 ![Demo](https://github.com/CSC4790-Fall2020-Org/senior-project-hdc-rahul-thapa/blob/master/assets/HDXplore_split_50_edit.gif)
 
