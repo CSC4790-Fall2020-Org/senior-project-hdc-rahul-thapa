@@ -65,7 +65,7 @@ python HDXplore_MNIST.py \
     --epochs 20 \
     --dataset validation \
     --method dynamic \
-    --data_split 0.33
+    --data_split 0.50 \
     --random_state 42 \
     --perturbation True
 ```
@@ -74,8 +74,8 @@ python HDXplore_MNIST.py \
 2. To evaluate the model, run the following script. Make sure you use the right models and epochs, consistent with the training/retraining process above. 
 ```
 python HDXplore_eval.py \
-    --path_to_raw_model ./models/raw_models_seeds_30#40#50_epochs_20_split_33.npy \
-    --path_to_retrained_model ./models/retrained_perturb_models_seeds_30#40#50_epochs_20_split_33.npy \
+    --path_to_raw_model ./models/raw_models_seeds_30#40#50_epochs_20_split_50.npy \
+    --path_to_retrained_model ./models/retrained_perturb_models_seeds_30#40#50_epochs_20_split_50.npy \
     --seeds 30#40#50 \
     --hd_dimension 10000
 ```
