@@ -26,7 +26,7 @@ If there are any technical questions after the README, please contact:
 
 ## Overview
 
-**Note: If you want to learn more about our work, checko out our full paper at [link](link)**
+**Note: If you want to learn more about our work, check out our full paper at [link](link)**
 
 ![overview](https://github.com/CSC4790-Fall2020-Org/senior-project-hdc-rahul-thapa/blob/master/assets/HDC_design_diagram.png)
 
@@ -89,5 +89,7 @@ Our framework, HDXplore, has following contributions/results:
 
 ## Demo
 
+**Note: If you want to see the full normal speed demo, here is the [link](link)**
 
+![Demo](https://github.com/CSC4790-Fall2020-Org/senior-project-hdc-rahul-thapa/blob/master/assets/HDXplore_split_50_edit.gif)
 
