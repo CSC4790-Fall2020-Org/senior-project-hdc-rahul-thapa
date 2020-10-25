@@ -8,8 +8,6 @@
 
 If there are any technical questions after the README, please contact:
 * connectthapa84@gmail.com
-* rthapa@villanova.edu
-
 
 ## Core Team
 * Dependable, Efficient, and Intelligent Computing Lab (DETAIL)
