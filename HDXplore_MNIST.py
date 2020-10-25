@@ -1,3 +1,8 @@
+"""
+Make sure you take a look at the readme before you run/make change to this code.
+"""
+
+# all the packages we need
 import numpy as np
 from mnist import MNIST
 from sklearn.model_selection import train_test_split
@@ -13,6 +18,7 @@ import sys
 from datetime import datetime
 import time
 
+# for logging the output spitted out in the terminal
 class Logger(object):
     def __init__(self, seeds, epochs, split, random_state):
         self.terminal = sys.stdout
@@ -23,11 +29,13 @@ class Logger(object):
     def flush(self):
         pass
 
+# an extra function in case you want to shuffle the dataset. Not so necessary as you can use the random seed
 def shuffle(X, y):
     permutation = np.arange(X.shape[0])
     np.random.shuffle(permutation)
     return X[permutation], y[permutation]
 
+# loading the MNIST dataset from the data folder
 def load_dataset():
     mndata = MNIST('./data/')
     X_train, labels_train = map(np.array, mndata.load_training())
@@ -36,19 +44,21 @@ def load_dataset():
     X_test = X_test/255.
     return X_train, labels_train, X_test, labels_test
 
+# projecting an image to higher dimension
 def get_scene(img, proj):
     return np.dot(img, proj.T)
 
-# Transform the image vectors into the hypervectors
+# project the entire images into the hypervectors
 def get_scenes(images, proj):
     return np.dot(images[:, :], proj.T)
 
+# classifying the images using cosine similarity
 def classify(images, digit_vectors):
     similarities = cosine_similarity(images, digit_vectors)
     classifications = np.argmax(similarities, axis=1)
     return classifications
 
-
+# gives you HD classifiers based on the seed and encoding you provide. Note: for this research, we only used floating point encoding.
 def HD_classifiers(seed, encoding="float"):
     print("Seed: ", seed)
     print("Encoding: ", encoding)
@@ -83,7 +93,7 @@ def HD_classifiers(seed, encoding="float"):
         
     return digit_vectors, proj, X_train_copy, X_valid_copy
 
-
+# takes the model and gives out the discprepancies and non-discrepancies
 def discrepancies(models):
     results_train = []
     results_valid = []
@@ -138,8 +148,11 @@ def discrepancies(models):
     df_non_discrepancies_valid.reset_index(inplace=True)
     return df_discrepancies_train, df_discrepancies_valid, df_non_discrepancies_train, df_non_discrepancies_valid
 
-
-def retraining(models, epochs, method="static", dataset="training"):
+"""
+Takes the model and retrains it for given epoch. This is perhaps the most important step.
+It is using all the discrepant images (the one with and without manual perturbations) for updating digit vectors
+"""
+def retraining(models, epochs, method="dynamic", dataset="training"):
     print()
     df_discrepancies_train, df_discrepancies_valid, _, _ = discrepancies(models)
     print("Retraining Started...")
@@ -171,6 +184,7 @@ def retraining(models, epochs, method="static", dataset="training"):
     print("Retraining Stopped...")
     return models
 
+# Just a helper function for testing. Not used in the pipeline of the framework.
 def perturb_retraining(models, epochs=1):
     _, _, df_non_discrepancies_train, df_non_discrepanceis_valid = discrepancies(models)
     _, X_discrepancies_projs, y_pred, y = perturb_discrepancies(models, X_valid, df_non_discrepancies_valid, n=len(df_non_discrepancies_valid))
@@ -188,7 +202,10 @@ def perturb_retraining(models, epochs=1):
     print("Retraining Stopped ...")
     return models
 
-
+"""
+this function takes the model, finds the images that all model agreed on, apply 4 predefined perturbations, and saves
+the discrepant perturbed images 
+"""
 def perturb_discrepancies(models, X, df_non_discrepancies, perturbations=[skew, noise, brightness, elastic_transform]):
     n = len(df_non_discrepancies)
     new_df = df_non_discrepancies.sample(n)
@@ -223,14 +240,17 @@ def perturb_discrepancies(models, X, df_non_discrepancies, perturbations=[skew, 
     return X_discrepancies, X_discrepancies_projs, y_pred, y
 
 
+# main function that uses function above to create the pipeline for our framework
 if __name__ == '__main__':
+
+    # parameterizing our script. You can also run the default values to replicate our result. 
     parser = argparse.ArgumentParser(description='HDXplore Framework for MNIST')
     parser.add_argument('--hd_dimension', default=10000, type=int, help='Dimension of Hypervector. Default 10000')
     parser.add_argument('--seeds', default='30#40#50', type=str, help="Three random seeds (ex: if [30, 40, 50], --seeds 30#40#50)")
     parser.add_argument('--epochs', default=20, type=int, help="Number of epochs for retraining. Defualt 20.")
     parser.add_argument('--dataset', default='validation', type=str, help="training or validation dataset to run the HDXplore algorithm on. Default validation")
     parser.add_argument('--method', default='dynamic', type=str, help="dynamic for updating the discrepant images on each epochs of retraining; static for retraining on the same initial discrepant images. Defualt dynamic.")
-    parser.add_argument('--data_split', default=0.33, type=float, help="Split fraction for training and validation set. Defualt 0.33.")
+    parser.add_argument('--data_split', default=0.50, type=float, help="Split fraction for training and validation set. Defualt 0.50.")
     parser.add_argument('--random_state', default=42, type=int, help="random state for train validation split. Defualt 42.")
     parser.add_argument('--perturbation', default='True', type=str, help="True if you want to apply manual perturbations to the images where all models agree on. Defualt True")
 

@@ -1,3 +1,9 @@
+"""
+Make sure you take a look at the readme before you run/make change to this code.
+"""
+
+# all the packages we need
+
 import numpy as np
 from mnist import MNIST
 from sklearn.model_selection import train_test_split
@@ -12,6 +18,8 @@ from tqdm import tqdm
 import sys
 from datetime import datetime
 
+
+# for logging the output spitted out in the terminal
 class Logger(object):
     def __init__(self, file_name):
         self.terminal = sys.stdout
@@ -22,11 +30,13 @@ class Logger(object):
     def flush(self):
         pass
 
+# an extra function in case you want to shuffle the dataset. Not so necessary as you can use the random seed
 def shuffle(X, y):
     permutation = np.arange(X.shape[0])
     np.random.shuffle(permutation)
     return X[permutation], y[permutation]
 
+# loading the MNIST dataset from the data folder
 def load_dataset():
     mndata = MNIST('./data/')
     X_train, labels_train = map(np.array, mndata.load_training())
@@ -35,18 +45,21 @@ def load_dataset():
     X_test = X_test/255.
     return X_train, labels_train, X_test, labels_test
 
+# projecting an image to higher dimension
 def get_scene(img, proj):
     return np.dot(img, proj.T)
 
-# Transform the image vectors into the hypervectors
+# project the entire images into the hypervectors
 def get_scenes(images, proj):
     return np.dot(images[:NUM_SAMPLES, :], proj.T)
 
+# classifying the images using cosine similarity
 def classify(images, digit_vectors):
     similarities = cosine_similarity(images, digit_vectors)
     classifications = np.argmax(similarities, axis=1)
     return classifications
 
+# gives the projectious using random seed for the dataset
 def projections(X, seeds, encoding="float"):
     print("Seeds: ", seeds)
     print("Encoding: ", encoding)
@@ -66,6 +79,7 @@ def projections(X, seeds, encoding="float"):
         X_projs.append(X_copy)        
     return X_projs, projs
 
+# takes the model and gives out the discprepancies and non-discrepancies
 def discrepancies(models, X, y, seeds):
     X_projs, projs = projections(X, seeds)
     results = []
@@ -96,6 +110,7 @@ def discrepancies(models, X, y, seeds):
     df_non_discrepancies.reset_index(inplace=True)
     return df_discrepancies, df_non_discrepancies
 
+# Just a helper function for testing. Not used in the pipeline of the framework.
 def perturb_discrepancies(models, projs, X, df_non_discrepancies, perturbations=[skew, noise, brightness, elastic_transform]):
     n = len(df_non_discrepancies)
     new_df = df_non_discrepancies.sample(n)
@@ -127,8 +142,10 @@ def perturb_discrepancies(models, projs, X, df_non_discrepancies, perturbations=
     print(f"{len(y)} perturbations found.")
     return X_discrepancies, X_discrepancies_projs, y_pred, y
 
-
+# main function that uses function above to create the pipeline for our framework
 if __name__ == '__main__':
+
+    # parameterizing our script. You can also run the default values to replicate our result. 
     parser = argparse.ArgumentParser(description='HDXplore Evaluation')
     parser.add_argument('--path_to_raw_model', default='./models/raw_models_seeds_30#40#50_epochs_20_split_33_random_42.npy', type=str, help='Path to the model without applying HDXplore')
     parser.add_argument('--path_to_retrained_model', default='./models/retrained_perturb_models_seeds_30#40#50_epochs_20_split_33_random_42.npy', type=str, help='Path to the retrained model using HDXplore')
@@ -137,7 +154,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    # Extracting name for saving log file
+    # extracting name for saving log file
     file_name = args.path_to_raw_model
     temp_file = file_name.split("/")[-1]
     temp_file = temp_file.split(".")[0]
