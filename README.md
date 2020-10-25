@@ -53,7 +53,7 @@ The link to the datasets we used in our experiments are given below. However, we
 We have also provided a data folder with MNIST dataset for ease of use.  
 
 ## Training
-Make sure you clone this repository and open command prompt inside the folder. 
+Make sure you clone this repository and open command prompt with this project as parent directory. 
 
 ## Steps for training/retraining
 1. We provide you with the HDXplore training script, [HDXplore_MNIST.py](./HDXplore_MNIST.py)
