@@ -12,8 +12,8 @@ If there are any technical questions after the README, please contact:
 ## Core Team
 * Dependable, Efficient, and Intelligent Computing Lab (DETAIL)
   	* Rahul Thapa (Lead Researcher, B.S in CS)
-	* Xun Jiao (Faculty Advisor, EECS)
 	* Dongning Ma (Ph.D. Students, EECS)
+	* Xun Jiao (Faculty Advisor, EECS)
 
 ## Table of Contents
 1. [Project Overview](#Overview)
@@ -22,6 +22,7 @@ If there are any technical questions after the README, please contact:
 4. [Training/Retraining Script](#Training)
 5. [Evaluation Script](#Evaluation)
 6. [Results](#Results)
+7. [End-to-End Demo](#Demo)
 
 ## Overview
 
@@ -86,8 +87,7 @@ Our framework, HDXplore, has following contributions/results:
 2. We were able to increase the accuracy of Hyperdimensional computing (HD) models from ~81.5% to ~89.5.
 3. The retrained model were more robust than the raw model without any retraining. On average, the retrained model has 40% less discrepancies than the raw model.
 
-
-
+## Demo
 
 
 
