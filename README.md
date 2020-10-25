@@ -1,4 +1,4 @@
-# Differential Testing in Hyperdimensional Computing Paradigm
+# HDXplore: Differential Testing in Hyperdimensional Computing Paradigm
 
 **Note: If you find my work useful, please use the approproiate citations as below.**
 
@@ -81,6 +81,12 @@ python HDXplore_eval.py \
 ```
 
 ## Results
+
+Our framework, HDXplore, has following contributions/results:
+
+1. Our framework generated 3-4 discrepant images per second. These discrepancies were used for retraining our models for multiple epochs dynamically, which increased the accuracy of the models steadely.
+2. We were able to increase the accuracy of Hyperdimensional computing (HD) models from ~81.5% to ~89.5.
+3. The retrained model were more robust than the raw model without any retraining. On average, the retrained model has 40% less discrepancies than the raw model.
 
 
 
