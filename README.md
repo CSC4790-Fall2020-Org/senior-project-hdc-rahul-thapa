@@ -55,7 +55,6 @@ The main requirements are listed below:
 The link to the datasets we used in our experiments are given below. However, we only mostly focused on MNIST.
 
 * MNIST: http://yann.lecun.com/exdb/mnist/
-* Face Images: https://archive.ics.uci.edu/ml/datasets/CMU+Face+Images 
 
 We have also provided a data folder with MNIST dataset for ease of use.  
 
