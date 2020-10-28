@@ -10,6 +10,8 @@ If there are any technical questions after the README, please contact:
 * connectthapa84@gmail.com
 
 ## Core Team
+![team](https://github.com/CSC4790-Fall2020-Org/senior-project-hdc-rahul-thapa/blob/master/assets/team.jpg)
+
 * Dependable, Efficient, and Intelligent Computing Lab (DETAIL)
   	* Rahul Thapa (Lead Researcher, B.S in CS)
 	* Dongning Ma (Ph.D. Students, EECS)
@@ -27,6 +29,12 @@ If there are any technical questions after the README, please contact:
 ## Overview
 
 **Note: If you want to learn more about our work, check out our full paper at [link](link)**
+
+HDC for image classification system diagram
+
+![HDC_classification](https://github.com/CSC4790-Fall2020-Org/senior-project-hdc-rahul-thapa/blob/master/assets/HDC_classification.jpeg)
+
+HDXplore framework highlevel diagram
 
 ![overview](https://github.com/CSC4790-Fall2020-Org/senior-project-hdc-rahul-thapa/blob/master/assets/HDC_design_diagram.png)
 
@@ -86,6 +94,21 @@ Our framework, HDXplore, has following contributions/results:
 1. Our framework generated 3-4 discrepant images per second. These discrepancies were used for retraining our models for multiple epochs dynamically, which increased the accuracy of the models steadely.
 2. We were able to increase the accuracy of Hyperdimensional computing (HD) models from ~81.5% to ~89.5.
 3. The retrained model were more robust than the raw model without any retraining. On average, the retrained model has 40% less discrepancies than the raw model.
+
+Results while Training and Validating HDC Models using HDXplore Framework on MNIST dataset
+
+![acc_1](https://github.com/CSC4790-Fall2020-Org/senior-project-hdc-rahul-thapa/blob/master/assets/accuracy_curve.png)
+
+![dis_1](https://github.com/CSC4790-Fall2020-Org/senior-project-hdc-rahul-thapa/blob/master/assets/discrepancies_curve.png)
+
+Results while Testing the models on completely unseen MNIST Testing Dataset
+
+![acc_test_1](https://github.com/CSC4790-Fall2020-Org/senior-project-hdc-rahul-thapa/blob/master/assets/accuracy_test_bar.png)
+
+![dis_test_1](https://github.com/CSC4790-Fall2020-Org/senior-project-hdc-rahul-thapa/blob/master/assets/dis_test_bar.png)
+
+![perturb_dis_test_1](https://github.com/CSC4790-Fall2020-Org/senior-project-hdc-rahul-thapa/blob/master/assets/perturb_dis_test_bar.png)
+
 
 ## Demo
 
