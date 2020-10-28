@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[131]:
-
-
 from scipy.ndimage.interpolation import map_coordinates
 from scipy.ndimage import interpolation
 from scipy.ndimage.filters import gaussian_filter
@@ -15,10 +9,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy as sp
 import math
-
-
-# In[132]:
-
 
 def skew(image, loc=12, scale=1):
     image = image.reshape(28, 28)
@@ -112,8 +102,6 @@ def load_dataset(s="data"):
     X_test = X_test/255.0
     return (X_train, labels_train), (X_test, labels_test)
 
-
-# In[ ]:
 
 
 
