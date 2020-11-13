@@ -272,11 +272,6 @@ def perturb_discrepancies(models, X, df_non_discrepancies, perturbations=[skew, 
                 images.append(hv)
                 if len(predictions) == 3:
                     if len(set(predictions)) > 1:
-                        perturbations_temp.append((old_image, new_image))
-                        print(len(perturbations_temp))
-                        if len(perturbations_temp) == 10:
-                            np.save(f"./temp/original_image.npy", perturbations_temp)
-                            exit()
                         X_discrepancies.append(new_image)
                         X_discrepancies_projs.append(images)
                         y_pred.append(predictions)
